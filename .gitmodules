@@ -46,3 +46,6 @@
 [submodule ".vim/bundle/indentpython"]
 	path = .vim/bundle/indentpython
 	url = https://github.com/vim-scripts/indentpython.git
+[submodule ".vim/bundle/vim-latex"]
+	path = .vim/bundle/vim-latex
+	url = git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex
