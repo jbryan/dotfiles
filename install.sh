@@ -13,5 +13,6 @@ popd
 ln -sfT $PWD/.vim ~/.vim
 ln -sfT $PWD/.vimrc ~/.vimrc
 ln -sfT $PWD/.screenrc ~/.screenrc
+ln -sfT $PWD/.bashrc ~/.bashrc
 
 
