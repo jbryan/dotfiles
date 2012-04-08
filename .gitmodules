@@ -49,3 +49,6 @@
 [submodule ".vim/bundle/vim-latex"]
 	path = .vim/bundle/vim-latex
 	url = git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex
+[submodule ".vim/bundle/glsl.vim"]
+	path = .vim/bundle/glsl.vim
+	url = https://github.com/vim-scripts/glsl.vim.git
