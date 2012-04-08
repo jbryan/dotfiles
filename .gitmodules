@@ -16,3 +16,9 @@
 [submodule ".vim/bundle/nerdcommenter"]
 	path = .vim/bundle/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter.git
+[submodule ".vim/bundle/desert256.vim"]
+	path = .vim/bundle/desert256.vim
+	url = https://github.com/vim-scripts/desert256.vim.git
+[submodule ".vim/bundle/pythoncomplete"]
+	path = .vim/bundle/pythoncomplete
+	url = https://github.com/vim-scripts/pythoncomplete.git
