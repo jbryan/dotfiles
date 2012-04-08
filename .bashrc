@@ -126,5 +126,6 @@ set -o emacs
 bind "\C-e":edit-and-execute-command
 
 
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+if [ -x $HOME/.rvm/bin ]; then 
+	PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+fi
