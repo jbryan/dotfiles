@@ -22,3 +22,24 @@
 [submodule ".vim/bundle/pythoncomplete"]
 	path = .vim/bundle/pythoncomplete
 	url = https://github.com/vim-scripts/pythoncomplete.git
+[submodule ".vim/bundle/syntastic"]
+	path = .vim/bundle/syntastic
+	url = https://github.com/scrooloose/syntastic.git
+[submodule ".vim/bundle/bufexplorer.zip"]
+	path = .vim/bundle/bufexplorer.zip
+	url = https://github.com/vim-scripts/bufexplorer.zip
+[submodule ".vim/bundle/DetectIndent"]
+	path = .vim/bundle/DetectIndent
+	url = https://github.com/vim-scripts/DetectIndent
+[submodule ".vim/bundle/detectindent"]
+	path = .vim/bundle/detectindent
+	url = https://github.com/ciaranm/detectindent.git
+[submodule ".vim/bundle/delmitmate"]
+	path = .vim/bundle/delmitmate
+	url = git://github.com/Raimondi/delimitMate.git
+[submodule ".vim/bundle/closetag"]
+	path = .vim/bundle/closetag
+	url = git://github.com/docunext/closetag.vim.git
+[submodule ".vim/bundle/tagbar"]
+	path = .vim/bundle/tagbar
+	url = git://github.com/majutsushi/tagbar.git

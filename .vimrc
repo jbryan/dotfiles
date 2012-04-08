@@ -18,7 +18,8 @@ set foldmethod=marker
 set formatoptions=tcqro
 set incsearch	"incremental search
 set ttymouse=xterm2
-set history=8000
+set history=1000
+set undolevels=1000
 set encoding=utf8
 set ml
 
@@ -40,6 +41,10 @@ set showmatch
 set matchtime=5
 
 " Setup tabs for 4 spaces
+:autocmd BufReadPost * :DetectIndent
+:let g:detectindent_preferred_indent = 2
+:let g:detectindent_preferred_expandtab = 1
+
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
@@ -90,10 +95,6 @@ if has("autocmd")
 
 	" Python
 	autocmd FileType python set completefunc=pythoncomplete#Complete
-	autocmd FileType python set shiftwidth=4
-	autocmd FileType python set tabstop=4
-	autocmd FileType python set softtabstop=4
-	autocmd FileType python set noexpandtab=4
 
 	" javascript
 	autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
