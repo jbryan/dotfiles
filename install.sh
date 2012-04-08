@@ -4,8 +4,8 @@ ruby extconf.rb
 make
 popd
 
-ln -sf $PWD/.vim ~/.vim
-ln -sf $PWD/.vimrc ~/.vimrc
-ln -sf $PWD/.screenrc ~/.screenrc
+ln -sfT $PWD/.vim ~/.vim
+ln -sfT $PWD/.vimrc ~/.vimrc
+ln -sfT $PWD/.screenrc ~/.screenrc
 
 
