@@ -54,6 +54,7 @@ set noexpandtab
 
 
 " Mappings
+nnoremap <silent> <F8> :TagbarToggle<CR>
 nmap qq :q<CR>
 nmap T :NERDTreeToggle<CR>
 
