@@ -1,60 +1,60 @@
 [submodule "vim-pathogen"]
 	path = vim-pathogen
 	url = https://github.com/tpope/vim-pathogen.git
-[submodule ".vim/bundle/vim-fugitive"]
-	path = .vim/bundle/vim-fugitive
+[submodule "vim/bundle/vim-fugitive"]
+	path = vim/bundle/vim-fugitive
 	url = git://github.com/tpope/vim-fugitive.git
-[submodule ".vim/bundle/command-t"]
-	path = .vim/bundle/command-t
+[submodule "vim/bundle/command-t"]
+	path = vim/bundle/command-t
 	url = git://git.wincent.com/command-t.git
-[submodule ".vim/bundle/pyflakes"]
-	path = .vim/bundle/pyflakes
+[submodule "vim/bundle/pyflakes"]
+	path = vim/bundle/pyflakes
 	url = git://github.com/kevinw/pyflakes-vim.git
-[submodule ".vim/bundle/nerdtree"]
-	path = .vim/bundle/nerdtree
+[submodule "vim/bundle/nerdtree"]
+	path = vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
-[submodule ".vim/bundle/nerdcommenter"]
-	path = .vim/bundle/nerdcommenter
+[submodule "vim/bundle/nerdcommenter"]
+	path = vim/bundle/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter.git
-[submodule ".vim/bundle/desert256.vim"]
-	path = .vim/bundle/desert256.vim
+[submodule "vim/bundle/desert256.vim"]
+	path = vim/bundle/desert256.vim
 	url = https://github.com/vim-scripts/desert256.vim.git
-[submodule ".vim/bundle/pythoncomplete"]
-	path = .vim/bundle/pythoncomplete
+[submodule "vim/bundle/pythoncomplete"]
+	path = vim/bundle/pythoncomplete
 	url = https://github.com/vim-scripts/pythoncomplete.git
-[submodule ".vim/bundle/syntastic"]
-	path = .vim/bundle/syntastic
+[submodule "vim/bundle/syntastic"]
+	path = vim/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
-[submodule ".vim/bundle/bufexplorer.zip"]
-	path = .vim/bundle/bufexplorer.zip
+[submodule "vim/bundle/bufexplorer.zip"]
+	path = vim/bundle/bufexplorer.zip
 	url = https://github.com/vim-scripts/bufexplorer.zip
-[submodule ".vim/bundle/DetectIndent"]
-	path = .vim/bundle/DetectIndent
+[submodule "vim/bundle/DetectIndent"]
+	path = vim/bundle/DetectIndent
 	url = https://github.com/vim-scripts/DetectIndent
-[submodule ".vim/bundle/detectindent"]
-	path = .vim/bundle/detectindent
+[submodule "vim/bundle/detectindent"]
+	path = vim/bundle/detectindent
 	url = https://github.com/ciaranm/detectindent.git
-[submodule ".vim/bundle/delmitmate"]
-	path = .vim/bundle/delmitmate
+[submodule "vim/bundle/delmitmate"]
+	path = vim/bundle/delmitmate
 	url = git://github.com/Raimondi/delimitMate.git
-[submodule ".vim/bundle/closetag"]
-	path = .vim/bundle/closetag
+[submodule "vim/bundle/closetag"]
+	path = vim/bundle/closetag
 	url = git://github.com/docunext/closetag.vim.git
-[submodule ".vim/bundle/tagbar"]
-	path = .vim/bundle/tagbar
+[submodule "vim/bundle/tagbar"]
+	path = vim/bundle/tagbar
 	url = git://github.com/majutsushi/tagbar.git
-[submodule ".vim/bundle/indentpython"]
-	path = .vim/bundle/indentpython
+[submodule "vim/bundle/indentpython"]
+	path = vim/bundle/indentpython
 	url = https://github.com/vim-scripts/indentpython.git
-[submodule ".vim/bundle/vim-latex"]
-	path = .vim/bundle/vim-latex
+[submodule "vim/bundle/vim-latex"]
+	path = vim/bundle/vim-latex
 	url = git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex
-[submodule ".vim/bundle/glsl.vim"]
-	path = .vim/bundle/glsl.vim
+[submodule "vim/bundle/glsl.vim"]
+	path = vim/bundle/glsl.vim
 	url = https://github.com/vim-scripts/glsl.vim.git
-[submodule ".vim/bundle/gnupg"]
-	path = .vim/bundle/gnupg
+[submodule "vim/bundle/gnupg"]
+	path = vim/bundle/gnupg
 	url = https://github.com/vim-scripts/gnupg.git
-[submodule ".vim/bundle/vim-javascript"]
-	path = .vim/bundle/vim-javascript
+[submodule "vim/bundle/vim-javascript"]
+	path = vim/bundle/vim-javascript
 	url = https://github.com/pangloss/vim-javascript.git

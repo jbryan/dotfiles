@@ -5,14 +5,15 @@ cd $(dirname $0)
 git submodule init
 git submodule update
 
-pushd .vim/bundle/command-t/ruby/command-t
+pushd vim/bundle/command-t/ruby/command-t
 ruby extconf.rb
 make
 popd
 
-ln -sfT $PWD/.vim ~/.vim
-ln -sfT $PWD/.vimrc ~/.vimrc
-ln -sfT $PWD/.screenrc ~/.screenrc
-ln -sfT $PWD/.bashrc ~/.bashrc
+DOTFILES="vim vimrc screenrc bashrc"
+
+for file in $DOTFILES; do
+	ln -sfT $PWD/$file ~/.$file
+done
 
 
