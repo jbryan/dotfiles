@@ -78,6 +78,11 @@ nmap \ck :call g:ClangUpdateQuickFix() <CR> :cope <CR>
 "Syntastic options
 let g:syntastic_check_on_open=1
 
+
+"Gist Options
+let g:gist_detect_filetype = 1
+let g:gist_show_privates = 1
+
 " Only do this part when compiled with support for autocommands
 if has("autocmd")
 	" In text files, always limit the width of text to 78 characters

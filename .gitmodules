@@ -64,3 +64,6 @@
 [submodule "vim/bundle/webapi-vim"]
 	path = vim/bundle/webapi-vim
 	url = https://github.com/mattn/webapi-vim.git
+[submodule "vim/bundle/figlet"]
+	path = vim/bundle/figlet
+	url = https://github.com/vim-scripts/Figlet.vim.git
