@@ -10,7 +10,7 @@ ruby extconf.rb
 make
 popd
 
-DOTFILES="vim vimrc screenrc bashrc"
+DOTFILES="vim vimrc screenrc bashrc bash_logout profile"
 
 for file in $DOTFILES; do
 	ln -sfT $PWD/$file ~/.$file

@@ -126,6 +126,10 @@ set -o emacs
 bind "\C-e":edit-and-execute-command
 
 
+# RVM
 if [ -x $HOME/.rvm/bin ]; then 
 	PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 fi
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
