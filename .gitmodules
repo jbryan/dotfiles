@@ -55,3 +55,6 @@
 [submodule ".vim/bundle/gnupg"]
 	path = .vim/bundle/gnupg
 	url = https://github.com/vim-scripts/gnupg.git
+[submodule ".vim/bundle/vim-javascript"]
+	path = .vim/bundle/vim-javascript
+	url = https://github.com/pangloss/vim-javascript.git
