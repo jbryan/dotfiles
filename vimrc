@@ -75,6 +75,9 @@ let g:clang_complete_auto=0
 "let g:clang_periodic_quickfix=1
 nmap \ck :call g:ClangUpdateQuickFix() <CR> :cope <CR>
 
+"Syntastic options
+let g:syntastic_check_on_open=1
+
 " Only do this part when compiled with support for autocommands
 if has("autocmd")
 	" In text files, always limit the width of text to 78 characters
