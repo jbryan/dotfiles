@@ -85,6 +85,8 @@ let g:gist_show_privates = 1
 
 " Only do this part when compiled with support for autocommands
 if has("autocmd")
+	" Json file
+	autocmd BufRead,BufNewFile *.json set ft=javascript
 	" In text files, always limit the width of text to 78 characters
 	autocmd BufRead *.txt set tw=78
 	" When editing a file, always jump to the last cursor position
