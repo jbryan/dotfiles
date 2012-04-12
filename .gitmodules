@@ -67,3 +67,6 @@
 [submodule "vim/bundle/figlet"]
 	path = vim/bundle/figlet
 	url = https://github.com/vim-scripts/Figlet.vim.git
+[submodule "vim/bundle/vim-yaml-indent"]
+	path = vim/bundle/vim-yaml-indent
+	url = git@github.com:jbryan/vim-yaml.git
