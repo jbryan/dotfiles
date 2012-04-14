@@ -10,6 +10,7 @@ DOTFILES="
 	bash_logout 
 	profile 
 	irbrc
+	tmux.conf
 "
 
 
