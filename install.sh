@@ -11,6 +11,7 @@ DOTFILES="
 	profile 
 	irbrc
 	tmux.conf
+	xmodmap
 "
 
 

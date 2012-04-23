@@ -1,0 +1,5 @@
+! Swap Escape and CapsLock
+clear Lock
+keycode 0x42 = Escape
+keycode 0x9 = Caps_Lock
+
