@@ -12,6 +12,7 @@ DOTFILES="
 	irbrc
 	tmux.conf
 	xmodmap
+	rtorrent.rc
 "
 
 
