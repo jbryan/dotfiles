@@ -56,7 +56,7 @@ set noexpandtab
 " Mappings
 nnoremap <silent> <F8> :TagbarToggle<CR>
 nmap qq :q<CR>
-nmap T :NERDTreeToggle<CR>
+nmap <leader>t :NERDTreeToggle<CR>
 
 "Latex default compiler
 let g:Tex_DefaultTargetFormat='pdf'
