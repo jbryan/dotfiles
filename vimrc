@@ -76,6 +76,9 @@ let g:clang_complete_auto=0
 nmap \ck :call g:ClangUpdateQuickFix() <CR> :cope <CR>
 
 "Syntastic options
+let g:syntastic_mode_map = { 'mode': 'active',
+														\ 'active_filetypes': [],
+														\ 'passive_filetypes': ['python'] }
 let g:syntastic_check_on_open=1
 
 
