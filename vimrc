@@ -109,6 +109,8 @@ if has("autocmd")
 
 	" Python
 	autocmd FileType python set completefunc=pythoncomplete#Complete
+	autocmd FileType * let g:detectindent_preferred_indent=2
+	autocmd FileType python let g:detectindent_preferred_indent=4
 
 	" javascript
 	autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
