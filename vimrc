@@ -52,6 +52,11 @@ set smarttab
 set shiftround
 set noexpandtab
 
+" If you prefer the Omni-Completion tip window to close when a selection is
+" made, these lines close it on movement in insert mode or when leaving
+" insert mode
+autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 " Mappings
 nnoremap <silent> <F8> :TagbarToggle<CR>
@@ -80,6 +85,10 @@ let g:syntastic_mode_map = { 'mode': 'active',
 														\ 'active_filetypes': [],
 														\ 'passive_filetypes': ['python'] }
 let g:syntastic_check_on_open=1
+
+"PyMode Options
+let g:pymode_folding=0
+let g:pymode_lint_cwindow=0
 
 
 "Gist Options
