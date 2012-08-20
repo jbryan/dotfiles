@@ -125,6 +125,12 @@ complete -W "$(echo `cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e s/,.*//g 
 set -o emacs
 bind "\C-e":edit-and-execute-command
 
+#CUDA
+if [ -d $HOME/cuda ]; then
+	export PATH=$HOME/cuda/bin:$PATH
+	export LD_LIBRARY_PATH=$HOME/cuda/lib64:$HOME/cuda/lib:$LD_LIBRARY_PATH
+	export CPATH=$HOME/cuda/include:$CPATH
+fi
 
 # RVM
 if [ -x $HOME/.rvm/bin ]; then 
