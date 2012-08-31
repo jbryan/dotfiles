@@ -16,9 +16,3 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-# if running X
-if [ -n "$DISPLAY" ]; then
-	if [ -f "$HOME/.xmodmap" ]; then
-		xmodmap "$HOME/.xmodmap"
-	fi
-fi

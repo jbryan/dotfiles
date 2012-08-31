@@ -1,0 +1,5 @@
+
+# include xmodmap if we can
+if [ -f "$HOME/.Xmodmap" ]; then
+	xmodmap "$HOME/.Xmodmap"
+fi

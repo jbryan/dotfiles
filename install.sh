@@ -11,8 +11,9 @@ DOTFILES="
 	profile 
 	irbrc
 	tmux.conf
-	xmodmap
+	Xmodmap
 	rtorrent.rc
+	xsessionrc
 "
 
 
