@@ -62,6 +62,8 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 nnoremap <silent> <F8> :TagbarToggle<CR>
 nmap qq :q<CR>
 nmap <leader>t :NERDTreeToggle<CR>
+nmap <leader>rg :RopeGotoDefinition<CR>
+nmap <leader>rf :RopeFindOccurrences<CR>
 
 "Latex default compiler
 let g:Tex_DefaultTargetFormat='pdf'
