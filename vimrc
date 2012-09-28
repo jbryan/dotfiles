@@ -91,6 +91,7 @@ let g:syntastic_check_on_open=1
 "PyMode Options
 let g:pymode_folding=0
 let g:pymode_lint_cwindow=0
+let g:pymode_utils_whitespaces=0
 
 
 "Gist Options
