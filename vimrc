@@ -131,6 +131,9 @@ if has("autocmd")
 
 	" css
 	autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+
+	" xml
+	autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 endif
 
 "turn on syntax highlighting if available
