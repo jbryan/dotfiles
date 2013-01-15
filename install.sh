@@ -8,6 +8,7 @@ DOTFILES="
 	screenrc 
 	bashrc 
 	bash_logout 
+	bash_prompts
 	profile 
 	irbrc
 	tmux.conf
