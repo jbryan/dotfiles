@@ -50,7 +50,7 @@ function format_prompt_data() {
   color=$3
 
   if [[ -n "${value}" ]]; then
-    echo -e "${NB_GRAY}${dash}(${color}${label}:${value}${NB_GRAY})"; 
+    echo -e "${NB_GRAY}${dash}(${color}${label}: ${value}${NB_GRAY})"; 
   fi
 }
 
