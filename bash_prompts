@@ -3,32 +3,65 @@
 # disable default prompt
 VIRTUAL_ENV_DISABLE_PROMPT=1
 
-export GRAY="\[\e[1;30m\]"
-export BRIGHT_WHITE="\[\e[1;37m\]"
-export WHITE="\[\e[0;37m\]"
-export BRIGHT_CYAN="\[\e[1;36m\]"
-export CYAN="\[\e[0;36m\]"
-export BRIGHT_RED="\[\e[1;31m\]"
-export RED="\[\e[0;31m\]"
-export BRIGHT_BLUE="\[\e[1;34m\]"
-export BLUE="\[\e[0;34m\]"
-export BRIGHT_YELLOW="\[\e[1;33m\]"
-export YELLOW="\[\e[0;33m\]"
-export BRIGHT_GREEN="\[\e[1;32m\]"
-export GREEN="\[\e[0;32m\]"
-export BRIGHT_MAGENTA="\[\e[1;35m\]"
-export MAGENTA="\[\e[0;35m\]"
-export CLEAR="\[\e[0m\]"
+GRAY="\[\e[1;30m\]"
+BRIGHT_WHITE="\[\e[1;37m\]"
+WHITE="\[\e[0;37m\]"
+BRIGHT_CYAN="\[\e[1;36m\]"
+CYAN="\[\e[0;36m\]"
+BRIGHT_RED="\[\e[1;31m\]"
+RED="\[\e[0;31m\]"
+BRIGHT_BLUE="\[\e[1;34m\]"
+BLUE="\[\e[0;34m\]"
+BRIGHT_YELLOW="\[\e[1;33m\]"
+YELLOW="\[\e[0;33m\]"
+BRIGHT_GREEN="\[\e[1;32m\]"
+GREEN="\[\e[0;32m\]"
+BRIGHT_MAGENTA="\[\e[1;35m\]"
+MAGENTA="\[\e[0;35m\]"
+CLEAR="\[\e[0m\]"
+
+# colors with no brackets for ps interpolation
+NB_GRAY="\e[1;30m"
+NB_BRIGHT_WHITE="\e[1;37m"
+NB_WHITE="\e[0;37m"
+NB_BRIGHT_CYAN="\e[1;36m"
+NB_CYAN="\e[0;36m"
+NB_BRIGHT_RED="\e[1;31m"
+NB_RED="\e[0;31m"
+NB_BRIGHT_BLUE="\e[1;34m"
+NB_BLUE="\e[0;34m"
+NB_BRIGHT_YELLOW="\e[1;33m"
+NB_YELLOW="\e[0;33m"
+NB_BRIGHT_GREEN="\e[1;32m"
+NB_GREEN="\e[0;32m"
+NB_BRIGHT_MAGENTA="\e[1;35m"
+NB_MAGENTA="\e[0;35m"
+NB_CLEAR="\e[0m"
 
 dash='─'
 ltop='┌'
 lbot='└'
 rtop='┐'
 rbot=''
-git_branch="\$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo --)"; git_branch="$GRAY$dash($BRIGHT_YELLOW$git_branch$GRAY)"; 
-virtualenv="\$(if [ -n \"\$VIRTUAL_ENV\" ]; then basename \$VIRTUAL_ENV; else echo --; fi)"; virtualenv="$GRAY$dash($BRIGHT_RED$virtualenv$GRAY)"; 
 
-PS_TOP="\n$GRAY$ltop$dash($YELLOW\u@\h$GRAY)$git_branch$virtualenv"
-PS_BOTTOM="$lbot$dash($BRIGHT_GREEN\w$GRAY)$dash($BRIGHT_GREEN\$(/bin/ls -1 | /usr/bin/wc -l | /bin/sed 's: ::g') files, \$(/bin/ls -lah | /bin/grep -m 1 total | /bin/sed 's/total //')b$GRAY) $CLEAR"
-PS1="$PS_TOP\n$PS_BOTTOM"
+function format_prompt_data() {
+  label=$1
+  value=$2
+  color=$3
+
+  if [[ -n "${value}" ]]; then
+    echo -e "${NB_GRAY}${dash}(${color}${label}:${value}${NB_GRAY})"; 
+  fi
+}
+
+git_branch="\$(format_prompt_data branch \"\$(git rev-parse --abbrev-ref HEAD 2>/dev/null)\" \${NB_BRIGHT_YELLOW})"; 
+virtualenv="\$(format_prompt_data venv \"\$(if [ -n \"\${VIRTUAL_ENV}\" ]; then basename \${VIRTUAL_ENV}; fi)\" \${NB_BRIGHT_CYAN})"; 
+
+DATA="${git_branch}${virtualenv}"
+PS_TOP="\n${GRAY}${ltop}${dash}(${YELLOW}\u@\h${GRAY})${DATA}"
+#SUDO_PS_TOP="\n${GRAY}${ltop}${dash}(${RED}\u@\h${GRAY})${DATA}"
+PS_BOTTOM="${lbot}${dash}(${BRIGHT_GREEN}\w${GRAY})${dash}(${BRIGHT_GREEN}\$(/bin/ls -1 | /usr/bin/wc -l | /bin/sed 's: ::g') files, \$(/bin/ls -lah | /bin/grep -m 1 total | /bin/sed 's/total //')b${GRAY}) ${CLEAR}"
+
+export PS1="${PS_TOP}\n${PS_BOTTOM}"
+#export SUDO_PS1="${SUDO_PS_TOP}\n${PS_BOTTOM}"
      
