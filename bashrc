@@ -68,6 +68,15 @@ xterm*|rxvt*)
     ;;
 esac
 
+# hack to get 256 color support in gnome terminal, cuz it's a piece of shit
+case "$TERM" in
+xterm)
+    export TERM=xterm-256color
+    ;;
+*)
+    ;;
+esac
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
