@@ -76,3 +76,6 @@
 [submodule "vim/bundle/python-mode"]
 	path = vim/bundle/python-mode
 	url = https://github.com/klen/python-mode.git
+[submodule "vim/bundle/opencl.vim"]
+	path = vim/bundle/opencl.vim
+	url = git@github.com:jbryan/opencl.vim.git
