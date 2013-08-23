@@ -79,3 +79,6 @@
 [submodule "vim/bundle/opencl.vim"]
 	path = vim/bundle/opencl.vim
 	url = git@github.com:jbryan/opencl.vim.git
+[submodule "vim/bundle/vim-surround"]
+	path = vim/bundle/vim-surround
+	url = git://github.com/tpope/vim-surround.git

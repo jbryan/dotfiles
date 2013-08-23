@@ -22,6 +22,8 @@ set history=1000
 set undolevels=1000
 set encoding=utf8
 set ml
+set dictionary="/etc/dictionaries-common/words"
+set nobackup
 
 "this should check if terminal supports it ... oh well
 set t_Co=256
