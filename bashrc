@@ -151,19 +151,16 @@ if [ -x $HOME/.rvm/bin ]; then
 fi
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-[[ -s "$HOME/.pythonbrew/etc/bashrc" ]] && source "$HOME/.pythonbrew/etc/bashrc" # Load PythonBrew 
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
 
 # set up specific rvm, python, and venv based on shell variables
-if [ -n "$USE_PYTHON" ]; then
-	pybrew use "$USE_PYTHON"
-	echo "Venv set to '$USE_PYTHON_VENV'"
-	if [ -n "$USE_PYTHON_VENV" ]; then
-		echo "Starting venv '$USE_PYTHON_VENV'"
-		pybrew venv use "$USE_PYTHON_VENV"
-	fi
+if [ -n "$USE_PYTHON_VENV" ]; then
+	echo "Starting venv '$USE_PYTHON_VENV'"
+	#pybrew venv use "$USE_PYTHON_VENV"
+	. $HOME/virtualenvs/${USE_PYTHON_VENV}/bin/activate
 fi
+
 if [ -n "$USE_RUBY" ]; then
 	rvm use "$USE_RUBY"
 fi
