@@ -1,0 +1,10 @@
+[merge]
+	tool = vimdiff
+[color]
+	ui = auto
+[user]
+	name = Joshua Bryan
+	email = josh.bryan@gmail.com
+[alias]
+	logpretty = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
+

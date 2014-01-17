@@ -15,6 +15,7 @@ DOTFILES="
 	Xmodmap
 	rtorrent.rc
 	xsessionrc
+	gitconfig
 "
 
 
