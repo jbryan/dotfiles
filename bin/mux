@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+SESSION_NAME=$1
+SESSION_CONFIG=~/.tmux/${SESSION_NAME}
+
+# setup session of not already exists
+
+if ! tmux has-session -t $SESSION_NAME 2>/dev/null; then
+
+  # create the new session
+  tmux new-session -d -s $SESSION_NAME
+  tmux source-file $SESSION_CONFIG
+
+fi
+
+# start
+exec tmux -2 attach-session -t $SESSION_NAME

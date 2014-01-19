@@ -22,12 +22,23 @@ DOTFILES="
 # Do the install
 cd $(dirname $0)
 
+echo "Updating git ..."
 git submodule init
 git submodule update
 
+echo
+echo "Installing dotfiles ..."
 for file in $DOTFILES; do
 	echo "Linking $file"
 	ln -sfT $PWD/$file ~/.$file
 done
 
 
+echo 
+echo "Installing bin files ..."
+cd bin
+mkdir -p ~/bin
+for file in *; do
+	echo "Linking $file"
+	ln -sfT $PWD/$file ~/bin/$file
+done
