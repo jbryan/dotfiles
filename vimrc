@@ -1,7 +1,7 @@
 set nocompatible
 "pathogen
 filetype off
-call pathogen#incubate()
+call pathogen#infect('bundle/{}')
 call pathogen#helptags() "call this when installing new plugins
 filetype plugin on
 filetype indent on
@@ -102,6 +102,8 @@ let g:gist_show_privates = 1
 
 " Only do this part when compiled with support for autocommands
 if has("autocmd")
+	" Thrift file
+	autocmd BufRead,BufNewFile *.thrift set ft=thrift
 	" Json file
 	autocmd BufRead,BufNewFile *.json set ft=javascript
 	" In text files, always limit the width of text to 78 characters
