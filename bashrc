@@ -145,13 +145,6 @@ if [ -d $HOME/cuda ]; then
 	export CPATH=$HOME/cuda/include:$CPATH
 fi
 
-# RVM
-if [ -x $HOME/.rvm/bin ]; then 
-	PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-fi
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
 
 # set up specific rvm, python, and venv based on shell variables
@@ -161,8 +154,12 @@ if [ -n "$USE_PYTHON_VENV" ]; then
 	. $HOME/virtualenvs/${USE_PYTHON_VENV}/bin/activate
 fi
 
+# RVM
+if [ -x $HOME/.rvm/bin ]; then 
+	PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+fi
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 if [ -n "$USE_RUBY" ]; then
 	rvm use "$USE_RUBY"
 fi
-
 
