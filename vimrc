@@ -28,11 +28,9 @@ set nobackup
 "this should check if terminal supports it ... oh well
 set t_Co=256
 
-" Hide the mouse pointer while typing
-" The window with the mouse pointer does not automatically become the active window
 " Right mouse button extends selections
 " Turn on mouse support
-set mousehide
+set nomousehide
 set nomousefocus
 set mousemodel=popup
 set mouse=a
