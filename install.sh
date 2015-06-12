@@ -47,5 +47,5 @@ cd ..
 # awesome
 echo 
 echo "Installing awesome config ..."
-mkdir -p ~/.config/awesome 
-ln -sfT $PWD/awesome.lua ~/.config/awesome/rc.lua
+mkdir -p ~/.config/
+ln -sfT $PWD/awesome ~/.config/awesome
