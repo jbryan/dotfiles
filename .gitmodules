@@ -16,9 +16,6 @@
 [submodule "vim/bundle/desert256.vim"]
 	path = vim/bundle/desert256.vim
 	url = https://github.com/vim-scripts/desert256.vim.git
-[submodule "vim/bundle/pythoncomplete"]
-	path = vim/bundle/pythoncomplete
-	url = https://github.com/vim-scripts/pythoncomplete.git
 [submodule "vim/bundle/syntastic"]
 	path = vim/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
@@ -70,9 +67,6 @@
 [submodule "vim/bundle/mustache.vim"]
 	path = vim/bundle/mustache.vim
 	url = git://github.com/juvenn/mustache.vim.git
-[submodule "vim/bundle/python-mode"]
-	path = vim/bundle/python-mode
-	url = https://github.com/klen/python-mode.git
 [submodule "vim/bundle/opencl.vim"]
 	path = vim/bundle/opencl.vim
 	url = git@github.com:jbryan/opencl.vim.git
@@ -88,3 +82,6 @@
 [submodule "vim/bundle/Dockerfile"]
 	path = vim/bundle/Dockerfile
 	url = https://github.com/ekalinin/Dockerfile.vim.git
+[submodule "vim/bundle/jedi-vim"]
+	path = vim/bundle/jedi-vim
+	url = https://github.com/davidhalter/jedi-vim.git
