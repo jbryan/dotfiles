@@ -94,3 +94,6 @@
 [submodule "vim/bundle/vim-snippets.vim"]
 	path = vim/bundle/vim-snippets.vim
 	url = https://github.com/SeySayux/vim-snippets.git
+[submodule "vim/bundle/ag.vim"]
+	path = vim/bundle/ag.vim
+	url = https://github.com/rking/ag.vim.git
