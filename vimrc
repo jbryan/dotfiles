@@ -24,6 +24,7 @@ set encoding=utf8
 set ml
 set dictionary="/etc/dictionaries-common/words"
 set nobackup
+set number
 
 "this should check if terminal supports it ... oh well
 set t_Co=256
@@ -83,61 +84,123 @@ let g:clang_complete_auto=0
 nmap \ck :call g:ClangUpdateQuickFix() <CR> :cope <CR>
 
 "Syntastic options
-let g:syntastic_mode_map = { 'mode': 'active',
-														\ 'active_filetypes': [],
-														\ 'passive_filetypes': ['python'] }
+let g:syntastic_mode_map = { 'mode': 'active', 'active_filetypes': [], 'passive_filetypes': [] }
 let g:syntastic_check_on_open=1
+let g:syntastic_python_checkers=['python', 'frosted', 'pep8']
+let g:syntastic_aggregate_errors = 1
+highlight link SyntasticError Error
 
-"PyMode Options
-let g:pymode_folding=0
-let g:pymode_lint_cwindow=0
-let g:pymode_utils_whitespaces=0
+"NeoComplete Options
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return neocomplete#close_popup() . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplete#close_popup()
+inoremap <expr><C-e>  neocomplete#cancel_popup()
+
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=jedi#completions
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
+endif
+
+let g:jedi#completions_enabled = 0
+let g:jedi#auto_vim_configuration = 0
+let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 
 "Gist Options
 let g:gist_detect_filetype = 1
 let g:gist_show_privates = 1
 
-" Only do this part when compiled with support for autocommands
-if has("autocmd")
-	" Thrift file
-	autocmd BufRead,BufNewFile *.thrift set ft=thrift
-	" Json file
-	autocmd BufRead,BufNewFile *.json set ft=javascript
-	" In text files, always limit the width of text to 78 characters
-	autocmd BufRead *.txt set tw=78
-	" When editing a file, always jump to the last cursor position
-	autocmd BufReadPost *
-	\ if line("'\"") > 0 && line ("'\"") <= line("$") |
-	\   exe "normal! g'\"" |
-	\ endif
-	" don't write swapfile on most commonly used directories for NFS mounts or USB sticks
-	autocmd BufNewFile,BufReadPre /media/*,/mnt/* set directory=~/tmp,/var/tmp,/tmp
-	" start with spec file template
-	autocmd BufNewFile *.spec 0r /usr/share/vim/vimfiles/template.spec
+"Ultisnips
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
-	" We want mail to use spell checking for Mutt
-	autocmd FileType mail set spell
-	" And we should expand tabs
-	autocmd FileType mail set expandtab
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+" Thrift file
+autocmd BufRead,BufNewFile *.thrift set ft=thrift
+" Json file
+autocmd BufRead,BufNewFile *.json set ft=javascript
+" In text files, always limit the width of text to 78 characters
+autocmd BufRead *.txt set tw=78
+" When editing a file, always jump to the last cursor position
+autocmd BufReadPost *
+\ if line("'\"") > 0 && line ("'\"") <= line("$") |
+\   exe "normal! g'\"" |
+\ endif
+" don't write swapfile on most commonly used directories for NFS mounts or USB sticks
+autocmd BufNewFile,BufReadPre /media/*,/mnt/* set directory=~/tmp,/var/tmp,/tmp
+" start with spec file template
+autocmd BufNewFile *.spec 0r /usr/share/vim/vimfiles/template.spec
 
-	" Python
-	autocmd FileType python set completefunc=pythoncomplete#Complete
-	autocmd FileType * let g:detectindent_preferred_indent=2
-	autocmd FileType python let g:detectindent_preferred_indent=4
+" We want mail to use spell checking for Mutt
+autocmd FileType mail set spell
+" And we should expand tabs
+autocmd FileType mail set expandtab
 
-	" javascript
-	autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+" Python
+autocmd FileType python set completefunc=pythoncomplete#Complete
+autocmd FileType * let g:detectindent_preferred_indent=2
+autocmd FileType python let g:detectindent_preferred_indent=4
 
-	" html
-	autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+" javascript
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 
-	" css
-	autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+" html
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 
-	" xml
-	autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
-endif
+" css
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+
+" xml
+autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 
 "turn on syntax highlighting if available
 if &t_Co > 1 || has("gui_running")
