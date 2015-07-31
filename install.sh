@@ -42,3 +42,10 @@ for file in *; do
 	echo "Linking $file"
 	ln -sfT $PWD/$file ~/bin/$file
 done
+cd ..
+
+# awesome
+echo 
+echo "Installing awesome config ..."
+mkdir -p ~/.config/
+ln -sfT $PWD/awesome ~/.config/awesome
