@@ -107,6 +107,8 @@ alias vi='vim'
 # useful alias for instant webserver
 alias http='python -m SimpleHTTPServer'
 
+alias myip='curl https://diagnostic.opendns.com/myip'
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
