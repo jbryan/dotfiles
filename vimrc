@@ -88,6 +88,12 @@ let g:syntastic_mode_map = { 'mode': 'active', 'active_filetypes': [], 'passive_
 let g:syntastic_check_on_open=1
 let g:syntastic_python_checkers=['python', 'frosted', 'pep8']
 let g:syntastic_aggregate_errors = 1
+
+" Ignore pep8 long line and import order errors
+let g:syntastic_quiet_messages = {
+			\  'regex': '\v(^E402|^E501)'
+			\}
+
 highlight link SyntasticError Error
 
 "NeoComplete Options
