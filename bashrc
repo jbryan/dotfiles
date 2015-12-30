@@ -153,7 +153,7 @@ fi
 if [ -n "$USE_PYTHON_VENV" ]; then
 	echo "Starting venv '$USE_PYTHON_VENV'"
 	#pybrew venv use "$USE_PYTHON_VENV"
-	. $HOME/virtualenvs/${USE_PYTHON_VENV}/bin/activate
+	. ${USE_PYTHON_VENV}/bin/activate
 fi
 
 # RVM
