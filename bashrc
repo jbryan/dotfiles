@@ -165,3 +165,4 @@ if [ -n "$USE_RUBY" ]; then
 	rvm use "$USE_RUBY"
 fi
 
+export AMDAPPSDKROOT="/home/josh/AMD/AMDAPPSDK-3.0"
