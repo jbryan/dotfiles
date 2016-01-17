@@ -148,6 +148,11 @@ if [ -d $HOME/cuda ]; then
 fi
 
 
+# set up local bash config
+if [ -n "${USE_LOCAL_CONFIG}" ]; then
+	echo "Sourcing local config '$USE_LOCAL_CONFIG'"
+	. ${USE_LOCAL_CONFIG}
+fi
 
 # set up specific rvm, python, and venv based on shell variables
 if [ -n "$USE_PYTHON_VENV" ]; then
