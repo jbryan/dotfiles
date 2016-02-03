@@ -25,6 +25,7 @@ set ml
 set dictionary="/etc/dictionaries-common/words"
 set nobackup
 set number
+set backspace=2
 
 "this should check if terminal supports it ... oh well
 set t_Co=256
