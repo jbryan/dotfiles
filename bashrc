@@ -118,7 +118,7 @@ fi
 
 
 # User specific aliases and functions
-export EDITOR=/usr/bin/vim
+export EDITOR=vim
 export LS_OPTIONS="$LS_OPTIONS -h"
 
 # set PATH so it includes user's private bin if it exists
