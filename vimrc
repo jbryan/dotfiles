@@ -187,8 +187,6 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEditSplit="vertical"
 " Thrift file
 autocmd BufRead,BufNewFile *.thrift set ft=thrift
-" Json file
-autocmd BufRead,BufNewFile *.json set ft=javascript
 " In text files, always limit the width of text to 78 characters
 autocmd BufRead *.txt set tw=78
 " When editing a file, always jump to the last cursor position
