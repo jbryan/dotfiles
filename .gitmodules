@@ -73,9 +73,6 @@
 [submodule "vim/bundle/vim-surround"]
 	path = vim/bundle/vim-surround
 	url = git://github.com/tpope/vim-surround.git
-[submodule "vim/bundle/thrift"]
-	path = vim/bundle/thrift
-	url = https://github.com/sprsquish/thrift.vim.git
 [submodule "vim/bundle/vim-airline"]
 	path = vim/bundle/vim-airline
 	url = https://github.com/bling/vim-airline.git
@@ -100,3 +97,6 @@
 [submodule "vim/bundle/vim-python-pep8-indent.git"]
 	path = vim/bundle/vim-python-pep8-indent.git
 	url = https://github.com/hynek/vim-python-pep8-indent.git
+[submodule "vim/bundle/vim-terraform"]
+	path = vim/bundle/vim-terraform
+	url = https://github.com/hashivim/vim-terraform.git
