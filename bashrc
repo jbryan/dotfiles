@@ -106,7 +106,7 @@ alias vi='vim'
 
 # useful alias for instant webserver
 alias http='python -m SimpleHTTPServer'
-
+alias randpass="dd if=/dev/urandom bs=9 count=1 2>/dev/null | base64"
 alias myip='curl https://diagnostic.opendns.com/myip'
 
 # enable programmable completion features (you don't need to enable
@@ -124,6 +124,10 @@ export LS_OPTIONS="$LS_OPTIONS -h"
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
+fi
+
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
 fi
 
 export LESS_TERMCAP_mb=$'\E[01;31m'
@@ -169,5 +173,10 @@ fi
 if [ -n "$USE_RUBY" ]; then
 	rvm use "$USE_RUBY"
 fi
+
+if command -v ruby; then
+	export PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
+fi
+
 
 export AMDAPPSDKROOT="/home/josh/AMD/AMDAPPSDK-3.0"
