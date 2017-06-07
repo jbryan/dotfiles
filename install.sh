@@ -16,6 +16,7 @@ DOTFILES="
 	rtorrent.rc
 	xsessionrc
 	gitconfig
+	psqlrc
 "
 
 
