@@ -65,8 +65,6 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 nnoremap <silent> <F8> :TagbarToggle<CR>
 nmap qq :q<CR>
 nmap <leader>t :NERDTreeToggle<CR>
-nmap <leader>rg :RopeGotoDefinition<CR>
-nmap <leader>rf :RopeFindOccurrences<CR>
 
 let g:NERDTreeQuitOnOpen=1
 
@@ -231,3 +229,7 @@ if &t_Co > 1 || has("gui_running")
 	colors desert256
 	syntax on
 endif
+
+" Use for grep
+set grepprg=rg\ --vimgrep
+command! -nargs=+ Rg execute 'silent grep! <args>' | copen 20
