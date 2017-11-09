@@ -1,7 +1,7 @@
 
 -- line styles
 \pset linestyle unicode
-\pset border 2
+\pset border 1
 \pset null ¤
 \pset format wrapped
 

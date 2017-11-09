@@ -70,8 +70,8 @@ let g:NERDTreeQuitOnOpen=1
 
 "Latex default compiler
 let g:Tex_DefaultTargetFormat='pdf'
-let g:Tex_ViewRuleComplete_pdf='okular "$*.pdf" &'
-let g:Tex_ViewRuleComplete_dvi='okular "$*.pdf" &'
+let g:Tex_ViewRuleComplete_pdf='evince "$*.pdf" &'
+let g:Tex_ViewRuleComplete_dvi='evince "$*.dvi" &'
 let g:Tex_MultipleCompileFormats='dvi,pdf'
 
 "OmniCPPComplet options

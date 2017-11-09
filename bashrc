@@ -179,5 +179,7 @@ if command -v ruby; then
 	export PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
 fi
 
+# NVM
+[[ -s "/usr/share/nvm/init-nvm.sh" ]] && source "/usr/share/nvm/init-nvm.sh"
 
 export AMDAPPSDKROOT="/home/josh/AMD/AMDAPPSDK-3.0"
