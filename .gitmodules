@@ -100,3 +100,6 @@
 [submodule "vim/bundle/vim-terraform"]
 	path = vim/bundle/vim-terraform
 	url = https://github.com/hashivim/vim-terraform.git
+[submodule "vim/bundle/vim-fubitive"]
+	path = vim/bundle/vim-fubitive
+	url = https://github.com/tommcdo/vim-fubitive.git
