@@ -25,8 +25,9 @@ set ml
 set dictionary="/etc/dictionaries-common/words"
 set nobackup
 set number
-set backspace=2
+set backspace=indent,eol,start
 set ve=block
+set autoread
 
 "this should check if terminal supports it ... oh well
 set t_Co=256
@@ -129,12 +130,13 @@ inoremap <expr><C-l>     neocomplete#complete_common_string()
 
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return neocomplete#close_popup() . "\<CR>"
-  " For no inserting <CR> key.
-  "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-endfunction
+"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+"function! s:my_cr_function()
+  "return neocomplete#close_popup() . "\<CR>"
+  "" For no inserting <CR> key.
+  ""return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+"endfunction
+
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
@@ -186,6 +188,10 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
+"Delimitmate
+let delimitMate_expand_cr=1
+let delimitMate_expand_space=1
+
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 " Thrift file
@@ -211,6 +217,7 @@ autocmd FileType mail set expandtab
 autocmd FileType python set completefunc=pythoncomplete#Complete
 autocmd FileType * let g:detectindent_preferred_indent=2
 autocmd FileType python let g:detectindent_preferred_indent=4
+autocmd FileType python let b:delimitMate_nesting_quotes = ['"']
 
 " javascript
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
