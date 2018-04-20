@@ -103,3 +103,6 @@
 [submodule "vim/bundle/vim-fubitive"]
 	path = vim/bundle/vim-fubitive
 	url = https://github.com/tommcdo/vim-fubitive.git
+[submodule "vim/bundle/vim-minizinc"]
+	path = vim/bundle/vim-minizinc
+	url = https://github.com/vale1410/vim-minizinc.git

@@ -105,7 +105,7 @@ alias l='ls -CF'
 alias vi='vim'
 
 # useful alias for instant webserver
-alias http='python -m SimpleHTTPServer'
+alias http='python -m http.server'
 alias randpass="dd if=/dev/urandom bs=9 count=1 2>/dev/null | base64"
 alias myip='curl https://diagnostic.opendns.com/myip'
 
