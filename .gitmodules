@@ -106,3 +106,9 @@
 [submodule "vim/bundle/vim-minizinc"]
 	path = vim/bundle/vim-minizinc
 	url = https://github.com/vale1410/vim-minizinc.git
+[submodule "vim/bundle/vim-fahrenheit"]
+	path = vim/bundle/vim-fahrenheit
+	url = https://github.com/fcpg/vim-fahrenheit
+[submodule "vim/bundle/vim-jellyx"]
+	path = vim/bundle/vim-jellyx
+	url = https://github.com/guns/jellyx.vim.git
