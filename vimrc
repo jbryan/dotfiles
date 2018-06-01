@@ -237,7 +237,7 @@ autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/n
 
 "turn on syntax highlighting if available
 if &t_Co > 1 || has("gui_running")
-	colors desert256
+	colors fahrenheit 
 	syntax on
 endif
 
