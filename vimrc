@@ -1,8 +1,13 @@
-set nocompatible
-"pathogen
-filetype off
-call pathogen#infect('bundle/{}')
-call pathogen#helptags() "call this when installing new plugins
+if &compatible
+  " `:set nocp` has many side effects. Therefore this should be done
+  " only when 'compatible' is set.
+  set nocompatible
+endif
+"call pathogen#infect('bundle/{}')
+"call pathogen#helptags() "call this when installing new plugins
+
+packloadall
+
 filetype plugin on
 filetype indent on
 
