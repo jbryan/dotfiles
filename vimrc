@@ -6,12 +6,11 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'w0rp/ale'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-fugitive'
-Plug 'kevinw/pyflakes-vim'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-scripts/desert256.vim'
-Plug 'scrooloose/syntastic'
 Plug 'vim-scripts/bufexplorer.zip'
 Plug 'vim-scripts/DetectIndent'
 Plug 'ciaranm/detectindent'
@@ -131,19 +130,8 @@ let g:clang_complete_auto=0
 "let g:clang_periodic_quickfix=1
 nmap \ck :call g:ClangUpdateQuickFix() <CR> :cope <CR>
 
-"Syntastic options
-let g:syntastic_mode_map = { 'mode': 'active', 'active_filetypes': [], 'passive_filetypes': [] }
-let g:syntastic_check_on_open=1
-let g:syntastic_python_checkers=['python', 'pyflakes', 'pycodestyle']
-let g:syntastic_python_checker_args=['--ignore=E501,W291']
-let g:syntastic_aggregate_errors = 1
-
-" Ignore pep8 long line and import order errors
-let g:syntastic_quiet_messages = {
-			\  'regex': '\v(^E402|^E501|W291)'
-			\}
-
-highlight link SyntasticError Error
+"ALE options
+let g:ale_python_flake8_args='--ignore=E501,W291'
 
 "NeoComplete Options
 let g:acp_enableAtStartup = 0
