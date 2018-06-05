@@ -3,10 +3,50 @@ if &compatible
   " only when 'compatible' is set.
   set nocompatible
 endif
-"call pathogen#infect('bundle/{}')
-"call pathogen#helptags() "call this when installing new plugins
 
-packloadall
+call plug#begin('~/.vim/plugged')
+
+Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-fugitive'
+Plug 'kevinw/pyflakes-vim'
+Plug 'scrooloose/nerdtree'
+Plug 'vim-scripts/desert256.vim'
+Plug 'scrooloose/syntastic'
+Plug 'vim-scripts/bufexplorer.zip'
+Plug 'vim-scripts/DetectIndent'
+Plug 'ciaranm/detectindent'
+Plug 'Raimondi/delimitMate'
+Plug 'docunext/closetag.vim'
+Plug 'majutsushi/tagbar'
+Plug 'vim-latex/vim-latex'
+Plug 'vim-scripts/glsl.vim'
+Plug 'vim-scripts/gnupg'
+Plug 'pangloss/vim-javascript'
+Plug 'vim-scripts/ctrlp.vim'
+Plug 'mattn/gist-vim'
+Plug 'mattn/webapi-vim'
+Plug 'vim-scripts/Figlet.vim'
+Plug 'jbryan/vim-yaml'
+Plug 'juvenn/mustache.vim'
+Plug 'jbryan/opencl.vim'
+Plug 'tpope/vim-surround'
+Plug 'bling/vim-airline'
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'davidhalter/jedi-vim'
+Plug 'Shougo/neocomplete.vim'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'rking/ag.vim'
+Plug 'hynek/vim-python-pep8-indent'
+Plug 'hashivim/vim-terraform'
+Plug 'tommcdo/vim-fubitive'
+Plug 'vale1410/vim-minizinc'
+Plug 'fcpg/vim-fahrenheit'
+Plug 'guns/jellyx.vim'
+Plug 'rip-rip/clang_complete'
+
+call plug#end()
+
 
 filetype plugin on
 filetype indent on
