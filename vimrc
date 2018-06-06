@@ -6,11 +6,14 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'davidhalter/jedi-vim'
+Plug 'Shougo/deoplete.nvim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'w0rp/ale'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
-Plug 'vim-scripts/desert256.vim'
 Plug 'vim-scripts/bufexplorer.zip'
 Plug 'vim-scripts/DetectIndent'
 Plug 'ciaranm/detectindent'
@@ -31,8 +34,6 @@ Plug 'jbryan/opencl.vim'
 Plug 'tpope/vim-surround'
 Plug 'bling/vim-airline'
 Plug 'ekalinin/Dockerfile.vim'
-Plug 'davidhalter/jedi-vim'
-Plug 'Shougo/neocomplete.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'rking/ag.vim'
@@ -40,9 +41,12 @@ Plug 'hynek/vim-python-pep8-indent'
 Plug 'hashivim/vim-terraform'
 Plug 'tommcdo/vim-fubitive'
 Plug 'vale1410/vim-minizinc'
+Plug 'rip-rip/clang_complete'
+
+"Color schemes
+Plug 'vim-scripts/desert256.vim'
 Plug 'fcpg/vim-fahrenheit'
 Plug 'guns/jellyx.vim'
-Plug 'rip-rip/clang_complete'
 
 call plug#end()
 
@@ -131,67 +135,41 @@ let g:clang_complete_auto=0
 nmap \ck :call g:ClangUpdateQuickFix() <CR> :cope <CR>
 
 "ALE options
-let g:ale_python_flake8_args='--ignore=E501,W291'
+let g:ale_python_flake8_options='--ignore=E501,W291'
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
 
 "NeoComplete Options
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+"let g:acp_enableAtStartup = 0
+" Use deoplete.
+" deoplete options
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
 
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
+" disable autocomplete by default
+let b:deoplete_disable_auto_complete=1 
+let g:deoplete_disable_auto_complete=1
+call deoplete#custom#buffer_option('auto_complete', v:false)
 
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
+if !exists('g:deoplete#omni#input_patterns')
+		let g:deoplete#omni#input_patterns = {}
 endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
+" Disable the candidates in Comment/String syntaxes.
+call deoplete#custom#source('_',
+						\ 'disabled_syntaxes', ['Comment', 'String'])
 
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-"function! s:my_cr_function()
-  "return neocomplete#close_popup() . "\<CR>"
-  "" For no inserting <CR> key.
-  ""return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-"endfunction
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplete#close_popup()
-inoremap <expr><C-e>  neocomplete#cancel_popup()
+" set sources
+"let g:deoplete#sources = {}
+"let g:deoplete#sources.cpp = ['LanguageClient']
+"let g:deoplete#sources.python = ['LanguageClient']
+"let g:deoplete#sources.python3 = ['LanguageClient']
+"let g:deoplete#sources.rust = ['LanguageClient']
+"let g:deoplete#sources.c = ['LanguageClient']
+"let g:deoplete#sources.vim = ['vim']
 
-" Add the virtualenv's site-packages to vim path
-if has('python')
-py << EOF
-import os.path
-import sys
-import vim
-if 'VIRTUAL_ENV' in os.environ:
-    project_base_dir = os.environ['VIRTUAL_ENV']
-    sys.path.insert(0, project_base_dir)
-    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-    if os.path.isfile(activate_this):
-      execfile(activate_this, dict(__file__=activate_this))
-EOF
-endif
 
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
@@ -255,6 +233,7 @@ autocmd FileType python set completefunc=pythoncomplete#Complete
 autocmd FileType * let g:detectindent_preferred_indent=2
 autocmd FileType python let g:detectindent_preferred_indent=4
 autocmd FileType python let b:delimitMate_nesting_quotes = ['"']
+autocmd FileType python let b:ale_fixers = ['yapf']
 
 " javascript
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
@@ -270,7 +249,7 @@ autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/n
 
 "turn on syntax highlighting if available
 if &t_Co > 1 || has("gui_running")
-	colors fahrenheit 
+	colors jellyx
 	syntax on
 endif
 
