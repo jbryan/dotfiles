@@ -6,44 +6,52 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+"Auto complete / programming tools
 Plug 'davidhalter/jedi-vim'
 Plug 'Shougo/deoplete.nvim'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'w0rp/ale'
-Plug 'scrooloose/nerdcommenter'
+Plug 'Rip-Rip/clang_complete'
+Plug 'zchee/deoplete-jedi'
+
+"Misc
+Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
+Plug 'tommcdo/vim-fubitive'
+Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-scripts/bufexplorer.zip'
 Plug 'vim-scripts/DetectIndent'
 Plug 'ciaranm/detectindent'
-Plug 'Raimondi/delimitMate'
 Plug 'docunext/closetag.vim'
 Plug 'majutsushi/tagbar'
-Plug 'vim-latex/vim-latex'
-Plug 'vim-scripts/glsl.vim'
-Plug 'vim-scripts/gnupg'
 Plug 'pangloss/vim-javascript'
 Plug 'vim-scripts/ctrlp.vim'
-Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
-Plug 'vim-scripts/Figlet.vim'
-Plug 'jbryan/vim-yaml'
-Plug 'juvenn/mustache.vim'
-Plug 'jbryan/opencl.vim'
-Plug 'tpope/vim-surround'
-Plug 'bling/vim-airline'
-Plug 'ekalinin/Dockerfile.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'rking/ag.vim'
+Plug 'vim-scripts/gnupg'
+
+"Auto closer
+"Plug 'jiangmiao/auto-pairs'
+Plug 'kana/vim-smartinput'
+
+"Languages
+Plug 'sheerun/vim-polyglot'
+Plug 'vim-scripts/glsl.vim'
+Plug 'vim-latex/vim-latex'
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'juvenn/mustache.vim'
+Plug 'jbryan/opencl.vim'
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'hashivim/vim-terraform'
-Plug 'tommcdo/vim-fubitive'
+Plug 'jbryan/vim-yaml'
 Plug 'vale1410/vim-minizinc'
-Plug 'rip-rip/clang_complete'
 
-"Color schemes
+"Color schemes / bling
+Plug 'bling/vim-airline'
 Plug 'vim-scripts/desert256.vim'
 Plug 'fcpg/vim-fahrenheit'
 Plug 'guns/jellyx.vim'
@@ -123,33 +131,21 @@ let g:Tex_ViewRuleComplete_pdf='evince "$*.pdf" &'
 let g:Tex_ViewRuleComplete_dvi='evince "$*.dvi" &'
 let g:Tex_MultipleCompileFormats='dvi,pdf'
 
-"OmniCPPComplet options
-let OmniCpp_MayCompleteDot=0
-let OmniCpp_MayCompleteArrow=0
-let OmniCpp_MayCompleteScope=0
-
 "clang complete options
-let g:clang_user_options="-I/usr/include/SDL"
-let g:clang_complete_auto=0
-"let g:clang_periodic_quickfix=1
-nmap \ck :call g:ClangUpdateQuickFix() <CR> :cope <CR>
 
 "ALE options
 let g:ale_python_flake8_options='--ignore=E501,W291'
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
 
-"NeoComplete Options
-"let g:acp_enableAtStartup = 0
-" Use deoplete.
-" deoplete options
+" Deoplete
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
 
 " disable autocomplete by default
-let b:deoplete_disable_auto_complete=1 
-let g:deoplete_disable_auto_complete=1
-call deoplete#custom#buffer_option('auto_complete', v:false)
+"let b:deoplete_disable_auto_complete=1 
+"let g:deoplete_disable_auto_complete=1
+"call deoplete#custom#buffer_option('auto_complete', v:false)
 
 if !exists('g:deoplete#omni#input_patterns')
 		let g:deoplete#omni#input_patterns = {}
@@ -162,46 +158,25 @@ call deoplete#custom#source('_',
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " set sources
-"let g:deoplete#sources = {}
-"let g:deoplete#sources.cpp = ['LanguageClient']
-"let g:deoplete#sources.python = ['LanguageClient']
-"let g:deoplete#sources.python3 = ['LanguageClient']
-"let g:deoplete#sources.rust = ['LanguageClient']
-"let g:deoplete#sources.c = ['LanguageClient']
-"let g:deoplete#sources.vim = ['vim']
+let g:deoplete#sources#clang#libclang_path = "/usr/lib/libclang.so"
+let g:deoplete#sources#clang#clang_header ="/usr/include/clang/"
 
 
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=jedi#completions
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+"autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+"autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+"autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+"autocmd FileType python setlocal omnifunc=jedi#completions
+"autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-if !exists('g:neocomplete#force_omni_input_patterns')
-  let g:neocomplete#force_omni_input_patterns = {}
-endif
 
 let g:jedi#completions_enabled = 0
 let g:jedi#auto_vim_configuration = 0
-let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
-
-"Gist Options
-let g:gist_detect_filetype = 1
-let g:gist_show_privates = 1
 
 "Ultisnips
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-"Delimitmate
-let delimitMate_expand_cr=1
-let delimitMate_expand_space=1
 
 "Ag
 let g:ag_lhandler="lopen"
@@ -232,7 +207,6 @@ autocmd FileType mail set expandtab
 autocmd FileType python set completefunc=pythoncomplete#Complete
 autocmd FileType * let g:detectindent_preferred_indent=2
 autocmd FileType python let g:detectindent_preferred_indent=4
-autocmd FileType python let b:delimitMate_nesting_quotes = ['"']
 autocmd FileType python let b:ale_fixers = ['yapf']
 
 " javascript
