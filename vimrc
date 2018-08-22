@@ -9,13 +9,17 @@ call plug#begin('~/.vim/plugged')
 "Auto complete / programming tools
 Plug 'davidhalter/jedi-vim'
 Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/denite.nvim'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'w0rp/ale'
 Plug 'Rip-Rip/clang_complete'
 Plug 'zchee/deoplete-jedi'
+Plug 'derekwyatt/vim-fswitch', { 'for': ['c', 'cpp', 'objc'] }
+Plug 'derekwyatt/vim-protodef', { 'for': ['c', 'cpp', 'objc'] }
 
 "Misc
+Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tommcdo/vim-fubitive'
@@ -175,8 +179,8 @@ let g:jedi#auto_vim_configuration = 0
 "Ultisnips
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 "Ag
 let g:ag_lhandler="lopen"
@@ -220,6 +224,9 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
 " xml
 autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
+
+" c++
+autocmd FileType cpp let b:ale_fixers = ['clang-format']
 
 "turn on syntax highlighting if available
 if &t_Co > 1 || has("gui_running")
