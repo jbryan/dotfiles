@@ -6,15 +6,20 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-"Auto complete / programming tools
-Plug 'davidhalter/jedi-vim'
+"Language Client
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+
+"Deoplete
 Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/denite.nvim'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
-Plug 'w0rp/ale'
-Plug 'Rip-Rip/clang_complete'
-Plug 'zchee/deoplete-jedi'
+"Plug 'w0rp/ale'
+
+
 Plug 'derekwyatt/vim-fswitch', { 'for': ['c', 'cpp', 'objc'] }
 Plug 'derekwyatt/vim-protodef', { 'for': ['c', 'cpp', 'objc'] }
 
@@ -31,15 +36,28 @@ Plug 'ciaranm/detectindent'
 Plug 'docunext/closetag.vim'
 Plug 'majutsushi/tagbar'
 Plug 'pangloss/vim-javascript'
-Plug 'vim-scripts/ctrlp.vim'
 Plug 'mattn/webapi-vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'rking/ag.vim'
 Plug 'vim-scripts/gnupg'
 
+" Fuzzy file finder
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+let g:fzf_action = {
+      \ 'ctrl-s': 'split',
+      \ 'ctrl-v': 'vsplit'
+      \ }
+nnoremap <c-p> :FZF<cr>
+augroup fzf
+  autocmd!
+  autocmd! FileType fzf
+  autocmd  FileType fzf set laststatus=0 noshowmode noruler
+    \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+augroup END
+
 "Auto closer
-"Plug 'jiangmiao/auto-pairs'
 Plug 'kana/vim-smartinput'
 
 "Languages
@@ -161,33 +179,18 @@ call deoplete#custom#source('_',
 
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
-" set sources
-let g:deoplete#sources#clang#libclang_path = "/usr/lib/libclang.so"
-let g:deoplete#sources#clang#clang_header ="/usr/include/clang/"
-
-
-"autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-"autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-"autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-"autocmd FileType python setlocal omnifunc=jedi#completions
-"autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-
-let g:jedi#completions_enabled = 0
-let g:jedi#auto_vim_configuration = 0
 
 "Ultisnips
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsEditSplit="vertical"
 
 "Ag
 let g:ag_lhandler="lopen"
 nnoremap gr :LAg! '<cword>'<CR> 
 
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
 " Thrift file
 autocmd BufRead,BufNewFile *.thrift set ft=thrift
 " In text files, always limit the width of text to 78 characters
@@ -208,25 +211,24 @@ autocmd FileType mail set spell
 autocmd FileType mail set expandtab
 
 " Python
-autocmd FileType python set completefunc=pythoncomplete#Complete
 autocmd FileType * let g:detectindent_preferred_indent=2
 autocmd FileType python let g:detectindent_preferred_indent=4
 autocmd FileType python let b:ale_fixers = ['yapf']
-
-" javascript
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-
-" html
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-
-" css
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
 " xml
 autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 
 " c++
 autocmd FileType cpp let b:ale_fixers = ['clang-format']
+nmap <silent> <Leader>of :FSHere<cr>
+nmap <silent> <Leader>ol :FSRight<cr>
+nmap <silent> <Leader>oL :FSSplitRight<cr>
+nmap <silent> <Leader>oh :FSLeft<cr>
+nmap <silent> <Leader>oH :FSSplitLeft<cr>
+nmap <silent> <Leader>ok :FSAbove<cr>
+nmap <silent> <Leader>oK :FSSplitAbove<cr>
+nmap <silent> <Leader>oj :FSBelow<cr>
+nmap <silent> <Leader>oJ :FSSplitBelow<cr>
 
 "turn on syntax highlighting if available
 if &t_Co > 1 || has("gui_running")
@@ -237,3 +239,26 @@ endif
 " Use for grep
 set grepprg=rg\ --vimgrep
 command! -nargs=+ Rg execute 'silent grep! <args>' | copen 20
+
+" Language server
+set hidden
+let g:LanguageClient_serverCommands = {
+    \ 'javascript': ['javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['javascript-typescript-stdio'],
+    \ 'python': ['pyls'],
+    \ 'cpp': ['clangd'],
+    \ 'c': ['clangd'],
+    \ 'dockerfile': ['docker-langserver'],
+	\ 'css': ['css-languageserver', '--stdio'],
+	\ 'html': ['html-languageserver', '--stdio'],
+	\ 'json': ['vscode-json-languageserver', '--stdio'],
+	\ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+	\ 'bash': ['bash-language-server', 'start'],
+	\ 'sh': ['bash-language-server', 'start'],
+    \ }
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+" Or map each action separately
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <Leader>r :call LanguageClient#textDocument_rename()<CR>
+
