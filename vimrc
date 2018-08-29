@@ -189,7 +189,7 @@ let g:UltiSnipsEditSplit="vertical"
 
 "Ag
 let g:ag_lhandler="lopen"
-nnoremap gr :LAg! '<cword>'<CR> 
+nnoremap gs :LAg! '<cword>'<CR> 
 
 " Thrift file
 autocmd BufRead,BufNewFile *.thrift set ft=thrift
@@ -246,8 +246,8 @@ let g:LanguageClient_serverCommands = {
     \ 'javascript': ['javascript-typescript-stdio'],
     \ 'javascript.jsx': ['javascript-typescript-stdio'],
     \ 'python': ['pyls'],
-    \ 'cpp': ['clangd'],
-    \ 'c': ['clangd'],
+    \ 'cpp': ['cquery', '--log-file=/tmp/cq.log', '--init={"cacheDirectory":"~/.cquery/"}'],
+    \ 'c': ['cquery'],
     \ 'dockerfile': ['docker-langserver'],
 	\ 'css': ['css-languageserver', '--stdio'],
 	\ 'html': ['html-languageserver', '--stdio'],
@@ -260,5 +260,9 @@ nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 " Or map each action separately
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
+nnoremap <silent> gi :call LanguageClient#textDocument_implementation()<CR>
 nnoremap <silent> <Leader>r :call LanguageClient#textDocument_rename()<CR>
+nnoremap <silent> <Leader>f :call LanguageClient#textDocument_formatting()<CR>
+set formatexpr=LanguageClient#textDocument_rangeFormatting_sync()
 
