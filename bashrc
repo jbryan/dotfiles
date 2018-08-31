@@ -140,7 +140,6 @@ complete -W "$(echo `cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e s/,.*//g 
 
 #key bindings
 set -o emacs
-bind "\C-j":edit-and-execute-command
 
 #CUDA
 if [ -d $HOME/cuda ]; then
