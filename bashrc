@@ -181,3 +181,4 @@ fi
 export AMDAPPSDKROOT="/home/josh/AMD/AMDAPPSDK-3.0"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+

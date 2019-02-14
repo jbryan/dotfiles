@@ -12,9 +12,10 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'do': 'bash install.sh',
     \ }
 
+
 "Deoplete
 Plug 'Shougo/deoplete.nvim'
-Plug 'Shougo/denite.nvim'
+"Plug 'Shougo/denite.nvim'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 "Plug 'w0rp/ale'
@@ -24,7 +25,7 @@ Plug 'derekwyatt/vim-fswitch', { 'for': ['c', 'cpp', 'objc'] }
 Plug 'derekwyatt/vim-protodef', { 'for': ['c', 'cpp', 'objc'] }
 
 "Misc
-Plug 'tpope/vim-dispatch'
+Plug 'kshenoy/vim-signature'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tommcdo/vim-fubitive'
@@ -39,17 +40,39 @@ Plug 'pangloss/vim-javascript'
 Plug 'mattn/webapi-vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'rking/ag.vim'
+Plug 'google/vim-searchindex'
+
+
+"Plug 'rking/ag.vim'
 Plug 'vim-scripts/gnupg'
+Plug 'mbbill/undotree'
 
 " Fuzzy file finder
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-let g:fzf_action = {
-      \ 'ctrl-s': 'split',
-      \ 'ctrl-v': 'vsplit'
-      \ }
+nnoremap gs :call fzf#vim#ag(expand('<cword>'))<CR>
+nnoremap gt :call fzf#vim#tags(expand('<cword>'))<CR>
 nnoremap <c-p> :FZF<cr>
+vnoremap gs y:Ag <C-r>"<CR>
+
+function! s:build_qf_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+
+let g:fzf_action = {
+  \ 'ctrl-l': function('s:build_qf_list'),
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+
 augroup fzf
   autocmd!
   autocmd! FileType fzf
@@ -98,6 +121,7 @@ set incsearch	"incremental search
 set ttymouse=xterm2
 set history=1000
 set undolevels=1000
+set undofile
 set encoding=utf8
 set ml
 set dictionary="/etc/dictionaries-common/words"
@@ -140,10 +164,16 @@ set noexpandtab
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
-" Mappings
-nnoremap <silent> <F8> :TagbarToggle<CR>
+" tagbar
+nnoremap <leader>e :TagbarOpenAutoClose<CR>
+let g:tagbar_left=1
 nmap qq :q<CR>
+
+" nerdtree
 nmap <leader>t :NERDTreeToggle<CR>
+
+" undo tree
+nmap <leader>u :UndotreeShow<CR>:UndotreeFocus<CR>
 
 let g:NERDTreeQuitOnOpen=1
 
@@ -186,10 +216,6 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEditSplit="vertical"
-
-"Ag
-let g:ag_lhandler="lopen"
-nnoremap gs :LAg! '<cword>'<CR> 
 
 " Thrift file
 autocmd BufRead,BufNewFile *.thrift set ft=thrift
@@ -236,10 +262,6 @@ if &t_Co > 1 || has("gui_running")
 	syntax on
 endif
 
-" Use for grep
-set grepprg=rg\ --vimgrep
-command! -nargs=+ Rg execute 'silent grep! <args>' | copen 20
-
 " Language server
 set hidden
 let g:LanguageClient_serverCommands = {
@@ -256,6 +278,8 @@ let g:LanguageClient_serverCommands = {
 	\ 'bash': ['bash-language-server', 'start'],
 	\ 'sh': ['bash-language-server', 'start'],
     \ }
+let g:LanguageClient_diagnosticsList = "Location"
+
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 " Or map each action separately
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
