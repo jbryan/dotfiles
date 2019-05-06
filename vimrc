@@ -6,19 +6,9 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-"Language Client
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-
-
-"Deoplete
-Plug 'Shougo/deoplete.nvim'
-"Plug 'Shougo/denite.nvim'
-Plug 'roxma/nvim-yarp'
-Plug 'roxma/vim-hug-neovim-rpc'
-"Plug 'w0rp/ale'
+Plug 'Shougo/neco-vim'
+Plug 'neoclide/coc-neco'
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
 
 
 Plug 'derekwyatt/vim-fswitch', { 'for': ['c', 'cpp', 'objc'] }
@@ -41,6 +31,8 @@ Plug 'mattn/webapi-vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'google/vim-searchindex'
+Plug 'mhinz/vim-signify'
+"Plug 'w0rp/ale'
 
 
 "Plug 'rking/ag.vim'
@@ -186,29 +178,22 @@ let g:Tex_MultipleCompileFormats='dvi,pdf'
 "clang complete options
 
 "ALE options
-let g:ale_python_flake8_options='--ignore=E501,W291'
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
+let g:ale_set_loclist = 1
+let g:ale_set_quickfix = 0
+let g:ale_completion_enabled = 0
 
-" Deoplete
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
-
-" disable autocomplete by default
-"let b:deoplete_disable_auto_complete=1 
-"let g:deoplete_disable_auto_complete=1
-"call deoplete#custom#buffer_option('auto_complete', v:false)
-
-if !exists('g:deoplete#omni#input_patterns')
-		let g:deoplete#omni#input_patterns = {}
-endif
-
-" Disable the candidates in Comment/String syntaxes.
-call deoplete#custom#source('_',
-						\ 'disabled_syntaxes', ['Comment', 'String'])
+let g:airline#extensions#ale#enabled = 1
+let g:airline_extensions = ['branch', 'coc']
+let g:airline_powerline_fonts=1
 
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
+"Signify
+let g:signify_sign_add               = '→'
+let g:signify_sign_delete            = '←'
+let g:signify_sign_delete_first_line = '←'
+let g:signify_sign_change            = '≈'
+let g:signify_sign_changedelete      = g:signify_sign_change
 
 "Ultisnips
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -237,9 +222,12 @@ autocmd FileType mail set spell
 autocmd FileType mail set expandtab
 
 " Python
+let g:ale_python_pylint_options='--disable=line-too-long,missing-docstring'
 autocmd FileType * let g:detectindent_preferred_indent=2
 autocmd FileType python let g:detectindent_preferred_indent=4
-autocmd FileType python let b:ale_fixers = ['yapf']
+autocmd FileType python let b:ale_fixers = ['black']
+autocmd FileType python let b:ale_linters = ['pylint']
+autocmd FileType python setlocal equalprg=black\ -q\ -
 
 " xml
 autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
@@ -264,29 +252,17 @@ endif
 
 " Language server
 set hidden
-let g:LanguageClient_serverCommands = {
-    \ 'javascript': ['javascript-typescript-stdio'],
-    \ 'javascript.jsx': ['javascript-typescript-stdio'],
-    \ 'python': ['pyls'],
-    \ 'cpp': ['cquery', '--log-file=/tmp/cq.log', '--init={"cacheDirectory":".cquery.cache/", "compilationDatabaseDirectory":"build"}'],
-    \ 'c': ['cquery', '--log-file=/tmp/cq.log', '--init={"cacheDirectory":".cquery.cache/", "compilationDatabaseDirectory":"build"}'],
-    \ 'dockerfile': ['docker-langserver'],
-	\ 'css': ['css-languageserver', '--stdio'],
-	\ 'html': ['html-languageserver', '--stdio'],
-	\ 'json': ['vscode-json-languageserver', '--stdio'],
-	\ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-	\ 'bash': ['bash-language-server', 'start'],
-	\ 'sh': ['bash-language-server', 'start'],
-    \ }
-let g:LanguageClient_diagnosticsList = "Location"
-
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 " Or map each action separately
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
-nnoremap <silent> gi :call LanguageClient#textDocument_implementation()<CR>
-nnoremap <silent> <Leader>r :call LanguageClient#textDocument_rename()<CR>
-nnoremap <silent> <Leader>f :call LanguageClient#textDocument_formatting()<CR>
-set formatexpr=LanguageClient#textDocument_rangeFormatting_sync()
+nnoremap <F5> :call CocAction("codeAction")<CR>
+nnoremap <silent> K :call CocAction("doHover")<CR>
+nnoremap <silent> gd :call CocAction("jumpDefinition")<CR>
+nnoremap <silent> gr :call CocAction("jumpReferences")<CR>
+nnoremap <silent> gi :call CocAction("jumpImplementation")<CR>
+nnoremap <silent> <Leader>r :call CocAction("rename")<CR>
+nnoremap <silent> <Leader>f :call CocAction("format")<CR>
+vnoremap <silent> <Leader>f :call CocAction("formatSelected")<CR>
+"set formatexpr=LanguageClient#textDocument_rangeFormatting_sync()
+
+" Signature Settings
+nnoremap m? :SignatureListGlobalMarks<CR>
 

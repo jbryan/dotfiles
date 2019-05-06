@@ -182,3 +182,7 @@ export AMDAPPSDKROOT="/home/josh/AMD/AMDAPPSDK-3.0"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+        source /etc/profile.d/vte.sh
+fi
+
