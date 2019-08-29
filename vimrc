@@ -8,7 +8,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'Shougo/neco-vim'
 Plug 'neoclide/coc-neco'
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
 
 Plug 'derekwyatt/vim-fswitch', { 'for': ['c', 'cpp', 'objc'] }
@@ -32,6 +32,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'google/vim-searchindex'
 Plug 'mhinz/vim-signify'
+Plug 'chrisbra/csv.vim'
 "Plug 'w0rp/ale'
 
 
@@ -122,6 +123,7 @@ set number
 set backspace=indent,eol,start
 set ve=block
 set autoread
+set clipboard=unnamedplus
 
 "this should check if terminal supports it ... oh well
 set t_Co=256
