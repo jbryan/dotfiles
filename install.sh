@@ -9,6 +9,8 @@ DOTFILES="
 	bashrc 
 	bash_logout 
 	bash_prompts
+	bash_completions
+	bash_completions.d
 	profile 
 	irbrc
 	tmux.conf
