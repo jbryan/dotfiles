@@ -184,7 +184,7 @@ let g:ale_set_loclist = 1
 let g:ale_set_quickfix = 0
 let g:ale_completion_enabled = 0
 
-let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#coc#enabled = 1
 let g:airline_extensions = ['branch', 'coc']
 let g:airline_powerline_fonts=1
 
