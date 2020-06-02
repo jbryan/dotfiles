@@ -33,6 +33,7 @@ Plug 'honza/vim-snippets'
 Plug 'google/vim-searchindex'
 Plug 'mhinz/vim-signify'
 Plug 'chrisbra/csv.vim'
+Plug 'freitass/todo.txt-vim'
 "Plug 'w0rp/ale'
 
 
@@ -47,6 +48,9 @@ nnoremap gs :call fzf#vim#ag(expand('<cword>'))<CR>
 nnoremap gt :call fzf#vim#tags(expand('<cword>'))<CR>
 nnoremap <c-p> :FZF<cr>
 vnoremap gs y:Ag <C-r>"<CR>
+
+" Todo.txt
+nnoremap td :vs ~/Dropbox/todo/todo.txt<CR>
 
 function! s:build_qf_list(lines)
   call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
@@ -173,8 +177,9 @@ let g:NERDTreeQuitOnOpen=1
 
 "Latex default compiler
 let g:Tex_DefaultTargetFormat='pdf'
-let g:Tex_ViewRuleComplete_pdf='evince "$*.pdf" &'
-let g:Tex_ViewRuleComplete_dvi='evince "$*.dvi" &'
+let g:Tex_CompileRule_pdf='lualatex'
+let g:Tex_ViewRuleComplete_pdf='okular "$*.pdf" &'
+let g:Tex_ViewRuleComplete_dvi='okular "$*.dvi" &'
 let g:Tex_MultipleCompileFormats='dvi,pdf'
 
 "clang complete options
