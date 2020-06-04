@@ -113,7 +113,6 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
-
 # User specific aliases and functions
 export EDITOR=vim
 export LS_OPTIONS="$LS_OPTIONS -h"
@@ -147,7 +146,6 @@ if [ -d $HOME/cuda ]; then
 	export LD_LIBRARY_PATH=$HOME/cuda/lib64:$HOME/cuda/lib:$LD_LIBRARY_PATH
 	export CPATH=$HOME/cuda/include:$CPATH
 fi
-
 
 # set up local bash config
 if [ -n "${USE_LOCAL_CONFIG}" ]; then
@@ -185,8 +183,14 @@ if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
         source /etc/profile.d/vte.sh
 fi
 
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 export PATH=$PATH:/opt/rocm/bin:/opt/rocm/profiler/bin:/opt/rocm/opencl/bin/x86_64
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+
+# Globus
+[[ -s "$HOME/.globus_profile" ]] && source "$HOME/.globus_profile"
