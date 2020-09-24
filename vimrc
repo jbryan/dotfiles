@@ -19,6 +19,7 @@ Plug 'kshenoy/vim-signature'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tommcdo/vim-fubitive'
+Plug 'tpope/vim-rhubarb'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-scripts/bufexplorer.zip'
@@ -128,6 +129,16 @@ set backspace=indent,eol,start
 set ve=block
 set autoread
 set clipboard=unnamedplus
+
+"set undo paths
+if !isdirectory($HOME . "/.cache/vim/backup")
+    call mkdir($HOME . "/.cache/vim/backup", "p")
+    call mkdir($HOME . "/.cache/vim/undo", "p")
+    call mkdir($HOME . "/.cache/vim/swap", "p")
+endif
+set backupdir=~/.cache/vim/backup//
+set undodir=~/.cache/vim/undo//
+set directory=~/.cache/vim/swap//
 
 "this should check if terminal supports it ... oh well
 set t_Co=256

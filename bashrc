@@ -154,10 +154,15 @@ if [ -n "${USE_LOCAL_CONFIG}" ]; then
 fi
 
 # set up specific rvm, python, and venv based on shell variables
+function venv {    
+    deactivate 2>/dev/null
+    source "${1}/bin/activate"
+}
+
 if [ -n "$USE_PYTHON_VENV" ]; then
 	echo "Starting venv '$USE_PYTHON_VENV'"
 	#pybrew venv use "$USE_PYTHON_VENV"
-	. ${USE_PYTHON_VENV}/bin/activate
+	venv ${USE_PYTHON_VENV}
 fi
 
 # RVM
