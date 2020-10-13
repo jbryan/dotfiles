@@ -112,6 +112,9 @@ alias myip='curl https://diagnostic.opendns.com/myip'
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
+if [ -f ~/.bash_completions ]; then
+    . ~/.bash_completions
+fi
 
 # User specific aliases and functions
 export EDITOR=vim
