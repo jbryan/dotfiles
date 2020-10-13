@@ -14,3 +14,5 @@
 	helper = cache --timeout=300
 [push]
 	default = matching
+[includeIf "gitdir:~/workspace/globus/"]
+	path = .gitconfig-globus
