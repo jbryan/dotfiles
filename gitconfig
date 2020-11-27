@@ -16,3 +16,5 @@
 	default = matching
 [includeIf "gitdir:~/workspace/globus/"]
 	path = .gitconfig-globus
+[includeIf "gitdir:~/workspace/funcx/"]
+	path = .gitconfig-globus
