@@ -18,3 +18,5 @@
 	path = .gitconfig-globus
 [includeIf "gitdir:~/workspace/funcx/"]
 	path = .gitconfig-globus
+[init]
+	defaultBranch = main

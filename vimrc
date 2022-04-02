@@ -35,6 +35,8 @@ Plug 'google/vim-searchindex'
 Plug 'mhinz/vim-signify'
 Plug 'chrisbra/csv.vim'
 Plug 'freitass/todo.txt-vim'
+Plug 'diepm/vim-rest-console'
+Plug 'editorconfig/editorconfig-vim'
 "Plug 'w0rp/ale'
 
 
@@ -167,6 +169,9 @@ set smarttab
 set shiftround
 set noexpandtab
 
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+cmap w!! w !sudo tee > /dev/null %
+
 " If you prefer the Omni-Completion tip window to close when a selection is
 " made, these lines close it on movement in insert mode or when leaving
 " insert mode
@@ -271,14 +276,14 @@ endif
 " Language server
 set hidden
 " Or map each action separately
-nnoremap <F5> :call CocAction("codeAction")<CR>
-nnoremap <silent> K :call CocAction("doHover")<CR>
-nnoremap <silent> gd :call CocAction("jumpDefinition")<CR>
-nnoremap <silent> gr :call CocAction("jumpReferences")<CR>
-nnoremap <silent> gi :call CocAction("jumpImplementation")<CR>
-nnoremap <silent> <Leader>r :call CocAction("rename")<CR>
-nnoremap <silent> <Leader>f :call CocAction("format")<CR>
-vnoremap <silent> <Leader>f :call CocAction("formatSelected")<CR>
+nnoremap <F5> :<C-u>call CocActionAsync("codeAction")<CR>
+nnoremap <silent> K :<C-u>call CocActionAsync("doHover")<CR>
+nnoremap <silent> gd :<C-u>call CocActionAsync("jumpDefinition")<CR>
+nnoremap <silent> gr :<C-u>call CocActionAsync("jumpReferences")<CR>
+nnoremap <silent> gi :<C-u>call CocActionAsync("jumpImplementation")<CR>
+nnoremap <silent> <Leader>r :<C-u>call CocActionAsync("rename")<CR>
+nnoremap <silent> <Leader>f :<C-u>call CocActionAsync("format")<CR>
+vnoremap <silent> <Leader>f :<C-u>call CocActionAsync("formatSelected")<CR>
 "set formatexpr=LanguageClient#textDocument_rangeFormatting_sync()
 
 " Signature Settings
