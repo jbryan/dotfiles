@@ -55,6 +55,12 @@ vnoremap gs y:Ag <C-r>"<CR>
 " Todo.txt
 nnoremap td :vs ~/Sync/todo/todo.txt<CR>
 
+" Run in terminal
+vnoremap tt :ter ++noclose<CR>
+nnoremap tt :. ter ++noclose<CR>
+nnoremap tp :ter ipython<CR>
+nnoremap tb :ter ++noclose<CR>
+
 function! s:build_qf_list(lines)
   call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
   copen
