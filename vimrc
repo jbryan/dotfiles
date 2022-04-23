@@ -53,7 +53,7 @@ nnoremap <c-p> :FZF<cr>
 vnoremap gs y:Ag <C-r>"<CR>
 
 " Todo.txt
-nnoremap td :vs ~/Dropbox/todo/todo.txt<CR>
+nnoremap td :vs ~/Sync/todo/todo.txt<CR>
 
 function! s:build_qf_list(lines)
   call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
