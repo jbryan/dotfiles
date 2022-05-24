@@ -57,7 +57,7 @@ function format_prompt_data() {
 git_branch="\$(format_prompt_data branch \"\$(git rev-parse --abbrev-ref HEAD 2>/dev/null)\" \${NB_BRIGHT_YELLOW})"; 
 virtualenv="\$(format_prompt_data venv \"\$(if [ -n \"\${VIRTUAL_ENV}\" ]; then basename \${VIRTUAL_ENV}; fi)\" \${NB_BRIGHT_CYAN})"; 
 aws_profile="\$(format_prompt_data aws \${AWS_PROFILE} \${NB_BRIGHT_GREEN})"; 
-kube_context="\$(format_prompt_data kubectl \$(kubectl config current-context) \${NB_BRIGHT_MAGENTA})"; 
+kube_context="\$(format_prompt_data kubectl \"\$(kubectl config current-context 2>/dev/null)\" \${NB_BRIGHT_MAGENTA})"; 
 
 DATA="${git_branch}${virtualenv}${aws_profile}${kube_context}"
 PS_TOP="\n${GRAY}${ltop}${dash}(${YELLOW}\u@\h${GRAY})${DATA}"
