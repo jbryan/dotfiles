@@ -18,7 +18,7 @@ Plug 'derekwyatt/vim-protodef', { 'for': ['c', 'cpp', 'objc'] }
 Plug 'kshenoy/vim-signature'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
-Plug 'tommcdo/vim-fubitive'
+"Plug 'tommcdo/vim-fubitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
@@ -38,7 +38,7 @@ Plug 'freitass/todo.txt-vim'
 Plug 'diepm/vim-rest-console'
 Plug 'editorconfig/editorconfig-vim'
 "Plug 'w0rp/ale'
-
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 
 "Plug 'rking/ag.vim'
 Plug 'vim-scripts/gnupg'

@@ -159,6 +159,9 @@ fi
 # set up specific rvm, python, and venv based on shell variables
 function venv {    
     deactivate 2>/dev/null
+    if [ ! -x "${1}" ]; then
+	python3 -m venv "${1}"
+    fi
     source "${1}/bin/activate"
 }
 
