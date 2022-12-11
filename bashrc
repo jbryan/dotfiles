@@ -196,10 +196,15 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 export PATH=$PATH:/opt/rocm/bin:/opt/rocm/profiler/bin:/opt/rocm/opencl/bin/x86_64
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-
-
 # Globus
 [[ -s "$HOME/.globus_profile" ]] && source "$HOME/.globus_profile"
 
+export PYENV_ROOT="$HOME/.pyenv"
+if [ -x "$PYENV_ROOT" ]; then
+    command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init -)"
+fi
+
+if [ -S "$XDG_RUNTIME_DIR/ssh-agent.socket" ]; then 
+    export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+fi
