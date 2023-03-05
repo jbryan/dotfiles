@@ -51,6 +51,7 @@ nnoremap gs :call fzf#vim#ag(expand('<cword>'))<CR>
 nnoremap gt :call fzf#vim#tags(expand('<cword>'))<CR>
 nnoremap <c-p> :FZF<cr>
 vnoremap gs y:Ag <C-r>"<CR>
+nnoremap gb :Buffers<CR>
 
 " Todo.txt
 nnoremap td :vs ~/Sync/todo/todo.txt<CR>

@@ -157,6 +157,12 @@ if [ -n "${USE_LOCAL_CONFIG}" ]; then
 fi
 
 # set up specific rvm, python, and venv based on shell variables
+export PYENV_ROOT="$HOME/.pyenv"
+if [ -x "$PYENV_ROOT" ]; then
+    command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init -)"
+fi
+
 function venv {    
     deactivate 2>/dev/null
     if [ ! -x "${1}" ]; then
@@ -201,12 +207,6 @@ export PATH=$PATH:/opt/rocm/bin:/opt/rocm/profiler/bin:/opt/rocm/opencl/bin/x86_
 
 # Globus
 [[ -s "$HOME/.globus_profile" ]] && source "$HOME/.globus_profile"
-
-export PYENV_ROOT="$HOME/.pyenv"
-if [ -x "$PYENV_ROOT" ]; then
-    command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init -)"
-fi
 
 if [ -S "$XDG_RUNTIME_DIR/ssh-agent.socket" ]; then 
     export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
