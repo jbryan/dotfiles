@@ -295,6 +295,10 @@ nnoremap <silent> <Leader>f :<C-u>call CocActionAsync("format")<CR>
 vnoremap <silent> <Leader>f :<C-u>call CocActionAsync("formatSelected")<CR>
 "set formatexpr=LanguageClient#textDocument_rangeFormatting_sync()
 
-" Signature Settings
+" Signature Settungs
 nnoremap m? :SignatureListGlobalMarks<CR>
 
+" Shortcut Shortcuts
+nnoremap <Leader>scg :%!scsc get -<CR>
+nnoremap <Leader>scc :%!scsc post -<CR>
+nnoremap <Leader>scp :%!scsc put -<CR>
