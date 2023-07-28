@@ -15,6 +15,7 @@ Plug 'derekwyatt/vim-fswitch', { 'for': ['c', 'cpp', 'objc'] }
 Plug 'derekwyatt/vim-protodef', { 'for': ['c', 'cpp', 'objc'] }
 
 "Misc
+Plug 'github/copilot.vim'
 Plug 'kshenoy/vim-signature'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
@@ -39,6 +40,7 @@ Plug 'diepm/vim-rest-console'
 Plug 'editorconfig/editorconfig-vim'
 "Plug 'w0rp/ale'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+Plug 'lifepillar/pgsql.vim'
 
 "Plug 'rking/ag.vim'
 Plug 'vim-scripts/gnupg'
