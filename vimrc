@@ -257,8 +257,6 @@ autocmd FileType mail set expandtab
 let g:ale_python_pylint_options='--disable=line-too-long,missing-docstring'
 autocmd FileType * let g:detectindent_preferred_indent=2
 autocmd FileType python let g:detectindent_preferred_indent=4
-autocmd FileType python let b:ale_fixers = ['black']
-autocmd FileType python let b:ale_linters = ['pylint']
 autocmd FileType python setlocal equalprg=black\ -q\ -
 
 " xml
@@ -285,14 +283,24 @@ endif
 " Language server
 set hidden
 " Or map each action separately
-nnoremap <F5> :<C-u>call CocActionAsync("codeAction")<CR>
+vmap <leader>a <Plug>(coc-codeaction-selected)<cr>
+xmap <leader>a <Plug>(coc-codeaction-selected)<cr>
+nmap <leader>a <Plug>(coc-codeaction<cr>
+vmap <leader>f  <Plug>(coc-format-selected)
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format)
+
+nmap <leader>rn <Plug>(coc-rename)
+nmap <silent> <leader>re <Plug>(coc-codeaction-refactor)
+xmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
+nmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
+
 nnoremap <silent> K :<C-u>call CocActionAsync("doHover")<CR>
-nnoremap <silent> gd :<C-u>call CocActionAsync("jumpDefinition")<CR>
-nnoremap <silent> gr :<C-u>call CocActionAsync("jumpReferences")<CR>
-nnoremap <silent> gi :<C-u>call CocActionAsync("jumpImplementation")<CR>
-nnoremap <silent> <Leader>r :<C-u>call CocActionAsync("rename")<CR>
-nnoremap <silent> <Leader>f :<C-u>call CocActionAsync("format")<CR>
-vnoremap <silent> <Leader>f :<C-u>call CocActionAsync("formatSelected")<CR>
+nnoremap <silent> gd <Plug>(coc-definition)
+nnoremap <silent> gr <Plug>(coc-references)
+nnoremap <silent> gi <Plug>(coc-implementation)
+nnoremap <silent> gt <Plug>(coc-type-definition)
+nnoremap <silent> <leader>c <Plug>(coc-outline)
 "set formatexpr=LanguageClient#textDocument_rangeFormatting_sync()
 
 " Signature Settungs
