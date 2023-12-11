@@ -211,3 +211,6 @@ export PATH=$PATH:/opt/rocm/bin:/opt/rocm/profiler/bin:/opt/rocm/opencl/bin/x86_
 if [ -S "$XDG_RUNTIME_DIR/ssh-agent.socket" ]; then 
     export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 fi
+
+# setup rclone
+export RCLONE_PASSWORD_COMMAND='kwallet-query -l kdewallet -r rclone_pw'
