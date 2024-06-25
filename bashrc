@@ -145,15 +145,15 @@ set -o emacs
 
 #CUDA
 if [ -d $HOME/cuda ]; then
-	export PATH=$HOME/cuda/bin:$PATH
-	export LD_LIBRARY_PATH=$HOME/cuda/lib64:$HOME/cuda/lib:$LD_LIBRARY_PATH
-	export CPATH=$HOME/cuda/include:$CPATH
+    export PATH=$HOME/cuda/bin:$PATH
+    export LD_LIBRARY_PATH=$HOME/cuda/lib64:$HOME/cuda/lib:$LD_LIBRARY_PATH
+    export CPATH=$HOME/cuda/include:$CPATH
 fi
 
 # set up local bash config
 if [ -n "${USE_LOCAL_CONFIG}" ]; then
-	echo "Sourcing local config '$USE_LOCAL_CONFIG'"
-	. ${USE_LOCAL_CONFIG}
+    echo "Sourcing local config '$USE_LOCAL_CONFIG'"
+    . ${USE_LOCAL_CONFIG}
 fi
 
 # set up specific rvm, python, and venv based on shell variables
@@ -172,9 +172,9 @@ function venv {
 }
 
 if [ -n "$USE_PYTHON_VENV" ]; then
-	echo "Starting venv '$USE_PYTHON_VENV'"
-	#pybrew venv use "$USE_PYTHON_VENV"
-	venv ${USE_PYTHON_VENV}
+    echo "Starting venv '$USE_PYTHON_VENV'"
+    #pybrew venv use "$USE_PYTHON_VENV"
+    venv ${USE_PYTHON_VENV}
 fi
 
 # RVM
@@ -185,20 +185,12 @@ if [ -n "$USE_RUBY" ]; then
 	rvm use "$USE_RUBY"
 fi
 
-if command -v ruby; then
-	export PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
-fi
-
 # NVM
 [[ -s "/usr/share/nvm/init-nvm.sh" ]] && source "/usr/share/nvm/init-nvm.sh"
 
 export AMDAPPSDKROOT="/home/josh/AMD/AMDAPPSDK-3.0"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-        source /etc/profile.d/vte.sh
-fi
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
