@@ -3,6 +3,7 @@
 # disable default prompt
 VIRTUAL_ENV_DISABLE_PROMPT=1
 
+# Color definitions
 GRAY="\[\e[1;30m\]"
 BRIGHT_WHITE="\[\e[1;37m\]"
 WHITE="\[\e[0;37m\]"
@@ -38,32 +39,39 @@ NB_BRIGHT_MAGENTA="\e[1;35m"
 NB_MAGENTA="\e[0;35m"
 NB_CLEAR="\e[0m"
 
-dash='─'
-ltop='┌'
-lbot='└'
-rtop='┐'
-rbot=''
+# Modern Unicode symbols
+git_icon=''
+python_icon='🐍'
+aws_icon='☁ '
+files_icon='∴'
+separator='❘'
+prompt_char='❯'
 
-function format_prompt_data() {
-  label=$1
-  value=$2
-  color=$3
+# Compact format function for single line
+function format_compact_data() {
+    local icon="$1"
+    local value="$2"
+    local color="$3"
 
-  if [[ -n "${value}" ]]; then
-    echo -e "${NB_GRAY}${dash}(${color}${label}: ${value}${NB_GRAY})"; 
-  fi
+    if [[ -n "${value}" ]]; then
+        echo -e " ${NB_WHITE}${separator} ${icon}${color}${value}${NB_CLEAR}"; 
+    fi
 }
 
-git_branch="\$(format_prompt_data  \"\$(git rev-parse --abbrev-ref HEAD 2>/dev/null)\" \${NB_BRIGHT_YELLOW})"; 
-virtualenv="\$(format_prompt_data venv \"\$(if [ -n \"\${VIRTUAL_ENV}\" ]; then basename \${VIRTUAL_ENV}; fi)\" \${NB_BRIGHT_CYAN})"; 
-aws_profile="\$(format_prompt_data aws \${AWS_PROFILE} \${NB_BRIGHT_GREEN})"; 
-#kube_context="\$(format_prompt_data kubectl \"\$(kubectl config current-context 2>/dev/null)\" \${NB_BRIGHT_MAGENTA})"; 
+# Build compact segments - only show if populated
+git_segment="\$(branch=\$(git rev-parse --abbrev-ref HEAD 2>/dev/null); [[ -n \"\$branch\" ]] && format_compact_data \"${git_icon}\" \"\$branch\" \${NB_BRIGHT_YELLOW})"
+venv_segment="\$(if [[ -n \"\$VIRTUAL_ENV\" ]]; then venv_name=\$(basename \$VIRTUAL_ENV); [[ -n \"\$venv_name\" ]] && format_compact_data \"${python_icon}\" \"\$venv_name\" \${NB_BRIGHT_CYAN}; fi)"
+aws_segment="\$([[ -n \"\$AWS_PROFILE\" ]] && format_compact_data \"${aws_icon}\" \${AWS_PROFILE} \${NB_BRIGHT_GREEN})"
 
-DATA="${git_branch}${virtualenv}${aws_profile}"
-PS_TOP="\n${GRAY}${ltop}${dash}(${YELLOW}\u@\h${GRAY})${DATA}"
-#SUDO_PS_TOP="\n${GRAY}${ltop}${dash}(${RED}\u@\h${GRAY})${DATA}"
-PS_BOTTOM="${lbot}${dash}(${BRIGHT_GREEN}\w${GRAY})${dash}(${BRIGHT_GREEN}\$(/bin/ls -1 | /usr/bin/wc -l | /bin/sed 's: ::g') files, \$(/bin/ls -lah | /bin/grep -m 1 total | /bin/sed 's/total //')b${GRAY}) ${CLEAR}"
+# File count (compact version) - only show if > 0
+file_count="\$(files=\$(/bin/ls -1 2>/dev/null | /usr/bin/wc -l | /bin/sed 's/[[:space:]]//g'); [[ \"\$files\" != \"0\" ]] && echo -n \" ${NB_WHITE}${separator} ${files_icon}${NB_BRIGHT_GREEN}\${files}\")"
 
-export PS1="${PS_TOP}\n${PS_BOTTOM}"
-#export SUDO_PS1="${SUDO_PS_TOP}\n${PS_BOTTOM}"
-     
+# Single-line prompt: user@host:path | git | venv | aws | files ❯
+export PS1="${BRIGHT_YELLOW}\u${WHITE}@${BRIGHT_YELLOW}\h${WHITE}:${BRIGHT_CYAN}\w${git_segment}${venv_segment}${aws_segment}${file_count} ${BRIGHT_GREEN}${prompt_char}${CLEAR} "
+
+# Set window title for supported terminals
+case "$TERM" in
+    xterm*|rxvt*|alacritty*)
+        export PS1="\[\e]0;\u@\h: \w\a\]$PS1"
+        ;;
+esac
